@@ -40,6 +40,7 @@ form input {
 }
 
 button {
+  color: white;
   cursor: pointer;
   padding: 5px 7px;
   outline: none;
