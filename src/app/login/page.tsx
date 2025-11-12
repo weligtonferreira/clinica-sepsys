@@ -1,8 +1,9 @@
 'use client';
 
-import { BsEye } from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import { api } from '@/http/api';
+import { useState } from 'react';
 import './style.css';
 
 type LoginSchema = {
@@ -12,6 +13,7 @@ type LoginSchema = {
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginSchema>(); // destructuring
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   async function loginUser(data: LoginSchema) {
     const dataLogin = {
@@ -20,6 +22,10 @@ export default function LoginPage() {
     };
     const response = await api.post('/login', dataLogin);
     console.log(response);
+  }
+
+  function toggleIsPasswordVisible() {
+    setIsPasswordVisible(!isPasswordVisible);
   }
 
   return (
@@ -32,8 +38,25 @@ export default function LoginPage() {
 
         <div className='input-group'>
           <label htmlFor='password'>Senha</label>
-          <input id='password' {...register('password')} type='password' />
-          {/* <BsEye size={24} className='text-black cursor-pointer' /> */}
+          <input
+            id='password'
+            {...register('password')}
+            type={isPasswordVisible ? 'text' : 'password'}
+          />
+
+          {isPasswordVisible ? (
+            <BsEyeSlash
+              onClick={toggleIsPasswordVisible}
+              size={24}
+              className='text-black cursor-pointer'
+            />
+          ) : (
+            <BsEye
+              onClick={toggleIsPasswordVisible}
+              size={24}
+              className='text-black cursor-pointer'
+            />
+          )}
         </div>
 
         <button type='submit'>Login</button>
