@@ -4,6 +4,8 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import { api } from '@/http/api';
 import { useState } from 'react';
+import { useAuth } from '@/hooks';
+
 import './style.css';
 
 type LoginSchema = {
@@ -14,14 +16,22 @@ type LoginSchema = {
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginSchema>(); // destructuring
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const { login } = useAuth();
 
   async function loginUser(data: LoginSchema) {
     const dataLogin = {
       no_email: data.email,
       ds_senha_hash: data.password,
     };
-    const response = await api.post('/login', dataLogin);
-    console.log(response);
+
+    try {
+      const { data } = await api.post('/login', dataLogin);
+      console.log(data);
+
+      login(data.dados);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function toggleIsPasswordVisible() {
