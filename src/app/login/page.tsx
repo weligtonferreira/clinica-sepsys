@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { api } from '@/http/api';
 import { useState } from 'react';
 import { useAuth } from '@/hooks';
-
+import { useRouter } from 'next/navigation';
 import './style.css';
 
 type LoginSchema = {
@@ -17,6 +17,7 @@ export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginSchema>(); // destructuring
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { login } = useAuth();
+  const router = useRouter();
 
   async function loginUser(data: LoginSchema) {
     const dataLogin = {
@@ -26,9 +27,8 @@ export default function LoginPage() {
 
     try {
       const { data } = await api.post('/login', dataLogin);
-      console.log(data);
-
       login(data.dados);
+      router.push('/home/users');
     } catch (error) {
       console.log(error);
     }
