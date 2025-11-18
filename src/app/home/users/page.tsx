@@ -18,12 +18,7 @@ export default function UsersListPage() {
   useEffect(() => {
     async function handleFetchUsers() {
       try {
-        const { data } = await api.get('/user', {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc2MjkwOTA1MywianRpIjoiYzM1MmM3Y2EtYmJhZC00NzFlLTk4YzQtZGI0YmM0MDBlYjFjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMzMyIsIm5iZiI6MTc2MjkwOTA1MywiY3NyZiI6IjIzMzUwYTNjLWRkYWItNDFmYS05NTM4LWI0NTBkZWNjNzhjZSIsImV4cCI6MTc2Mzc3MzA1M30.0o951Msfb1GuVZ3N4NZwsLT1Wh915t09EoxZFnWNc7I`,
-          },
-        });
-        console.log(data);
+        const { data } = await api.get('/user');
         setUsers(data.content);
       } catch (error) {
         console.log(error);
@@ -44,7 +39,9 @@ export default function UsersListPage() {
 
                 <div className='flex gap-2'>
                   <MdEdit
-                    onClick={() => router.push(`/users/${user.nu_user}/edit`)}
+                    onClick={() =>
+                      router.push(`/home/users/${user.nu_user}/edit`)
+                    }
                     className='text-sky-900 cursor-pointer'
                     size={20}
                   />
