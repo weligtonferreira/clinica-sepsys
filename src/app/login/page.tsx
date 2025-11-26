@@ -6,6 +6,8 @@ import { api } from '@/http/api';
 import { useState } from 'react';
 import { useAuth } from '@/hooks';
 import { useRouter } from 'next/navigation';
+import { notifyErrorPopUp, notifySuccessPopUp } from '@/utils/notify-popup';
+import { AxiosError } from 'axios';
 import './style.css';
 
 type LoginSchema = {
@@ -15,7 +17,8 @@ type LoginSchema = {
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginSchema>(); // destructuring
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { login } = useAuth();
   const router = useRouter();
 
@@ -26,11 +29,25 @@ export default function LoginPage() {
     };
 
     try {
+      setIsLoading(true);
+
       const { data } = await api.post('/login', dataLogin);
       login(data.dados);
+
+      notifySuccessPopUp('Usuário logado com sucesso!');
+
       router.push('/home/users');
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.status && error.status < 500) {
+          notifyErrorPopUp(error?.response?.data.message, 4000);
+        } else {
+          notifyErrorPopUp('Erro desconhecido!');
+          console.log(error);
+        }
+      }
+    } finally {
+      setIsLoading(false);
     }
   }
 
