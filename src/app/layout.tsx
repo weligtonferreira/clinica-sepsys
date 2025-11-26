@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AppProvider } from '@/contexts';
+import { ToastContainer } from 'react-toastify';
 import './globals.css';
 
 const inter = Inter({
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang='pt-BR' className={inter.variable}>
       <body className='antialiased'>
+        <ToastContainer limit={5} />
         <AppProvider>{children}</AppProvider>
       </body>
     </html>
