@@ -35,7 +35,7 @@ export default function UsersListPage() {
           {users &&
             users.map((user) => (
               <div key={user.nu_user} className='flex justify-between w-full'>
-                <li className='text-black text-sm'>{user.no_user}</li>
+                <li className='text-black'>{user.no_user}</li>
 
                 <div className='flex gap-2'>
                   <MdEdit
@@ -43,9 +43,9 @@ export default function UsersListPage() {
                       router.push(`/home/users/${user.nu_user}/edit`)
                     }
                     className='text-sky-900 cursor-pointer'
-                    size={20}
+                    size={22}
                   />
-                  <FaTrash className='text-red-900 cursor-pointer' size={18} />
+                  <FaTrash className='text-red-900 cursor-pointer' size={20} />
                 </div>
               </div>
             ))}
