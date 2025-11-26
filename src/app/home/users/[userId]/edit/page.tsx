@@ -16,14 +16,19 @@ type UpdateUserSchema = {
 export default function EditUserPage() {
   const { register, handleSubmit, setValue } = useForm<UpdateUserSchema>();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [user, setUser] = useState<User>();
   const { userId } = useParams();
 
   async function handleUpdateUser(updateUserInput: UpdateUserSchema) {
     console.log(updateUserInput);
 
     try {
-      const { data } = await api.put(`/user/${userId}`, {
+      const { data } = await api.put(`/user`, {
+        nu_user: userId,
         no_user: updateUserInput.name,
+        no_email: user?.no_email,
+        ds_senha_hash: updateUserInput.password,
+        ic_ativo: 1,
       });
       console.log(data);
     } catch (error) {
@@ -39,6 +44,7 @@ export default function EditUserPage() {
     async function handleFetchUser() {
       try {
         const { data: user } = await api.get<User>(`/user?id=${userId}`);
+        setUser(user);
         setValue('name', user.no_user);
       } catch (error) {
         console.log(error);
