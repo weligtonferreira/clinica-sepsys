@@ -1,6 +1,7 @@
 'use client';
 
 import { api } from '@/http/api';
+import { handleAxiosError, notifySuccessPopUp } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
@@ -28,6 +29,17 @@ export default function UsersListPage() {
     handleFetchUsers();
   }, []);
 
+  async function handleDeleteUser(userId: number) {
+    try {
+      await api.delete(`/paciente?id=${userId}`);
+      const newUsers = users.filter((u) => u.nu_user !== userId);
+      setUsers(newUsers);
+      notifySuccessPopUp('Usuário removido com sucesso!');
+    } catch (error) {
+      handleAxiosError(error);
+    }
+  }
+
   return (
     <main className="flex items-center justify-center min-h-screen h-full w-full">
       <div className="bg-white p-4 rounded-lg w-[90%] md:w-full max-w-xl shadow">
@@ -45,7 +57,12 @@ export default function UsersListPage() {
                     className="text-sky-900 cursor-pointer"
                     size={22}
                   />
-                  <FaTrash className="text-red-900 cursor-pointer" size={20} />
+
+                  <FaTrash
+                    onClick={() => handleDeleteUser(user.nu_user)}
+                    className="text-red-900 cursor-pointer"
+                    size={20}
+                  />
                 </div>
               </div>
             ))}
