@@ -6,8 +6,9 @@ import { api } from '@/http/api';
 import { useState } from 'react';
 import { useAuth } from '@/hooks';
 import { useRouter } from 'next/navigation';
-import { notifyErrorPopUp, notifySuccessPopUp } from '@/utils/notify-popup';
+import { notifySuccessPopUp } from '@/utils/notify-popup';
 import { AxiosError } from 'axios';
+import { handleAxiosError } from '@/utils';
 import './style.css';
 
 type LoginSchema = {
@@ -39,12 +40,7 @@ export default function LoginPage() {
       router.push('/home/users');
     } catch (error) {
       if (error instanceof AxiosError) {
-        if (error.status && error.status < 500) {
-          notifyErrorPopUp(error?.response?.data.message, 4000);
-        } else {
-          notifyErrorPopUp('Erro desconhecido!');
-          console.log(error);
-        }
+        handleAxiosError(error);
       }
     } finally {
       setIsLoading(false);
@@ -57,16 +53,16 @@ export default function LoginPage() {
 
   return (
     <main>
-      <form onSubmit={handleSubmit(loginUser)}>
-        <div className='input-group'>
-          <label htmlFor='email'>E-mail</label>
-          <input id='email' {...register('email')} type='text' />
+      <form className="shadow-2xl" onSubmit={handleSubmit(loginUser)}>
+        <div className="input-group">
+          <label htmlFor="email">E-mail</label>
+          <input id="email" {...register('email')} type="text" />
         </div>
 
-        <div className='input-group'>
-          <label htmlFor='password'>Senha</label>
+        <div className="input-group">
+          <label htmlFor="password">Senha</label>
           <input
-            id='password'
+            id="password"
             {...register('password')}
             type={isPasswordVisible ? 'text' : 'password'}
           />
@@ -75,20 +71,20 @@ export default function LoginPage() {
             <BsEyeSlash
               onClick={toggleIsPasswordVisible}
               size={24}
-              className='text-black cursor-pointer'
+              className="cursor-pointer text-black"
             />
           ) : (
             <BsEye
               onClick={toggleIsPasswordVisible}
               size={24}
-              className='text-black cursor-pointer'
+              className="cursor-pointer text-black"
             />
           )}
         </div>
 
-        <button type='submit'>Login</button>
+        <button type="submit">Login</button>
 
-        <span className='text-neutral-500 underline cursor-pointer'>
+        <span className="cursor-pointer text-neutral-500 underline">
           Esqueci a senha
         </span>
       </form>
