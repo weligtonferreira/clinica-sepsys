@@ -1,0 +1,64 @@
+.main{
+  display: flex;  
+  flex-direction: column;          
+  align-items: center;     
+  justify-content: center;   
+  min-height: 100vh;          
+  height: 100%;               
+  width: 100%;                
+}
+
+.titulo{
+  font-size: 4rem;
+}
+
+.display{
+  background-color: #ffffff;  
+  padding: 1rem;              
+  border-radius: 0.5rem;      
+  width: 90%;                  
+  max-width: 36rem;            
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 
+              0 1px 2px rgba(0, 0, 0, 0.06); 
+}
+
+.add-paciente{
+    cursor: pointer;
+    background-color: aqua;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: black solid 2px;
+    color: black;
+
+}
+
+.lista-pacientes{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item-lista-pacientes{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nome-lista-pacientes{
+    color: black;
+}
+
+.opcoes-item{
+    display: flex;
+    gap: 2;
+}
+
+.icone-editar{
+    color: black;
+    cursor: pointer;
+}
+
+.icone-excluir{
+    color: red;
+    cursor: pointer;
+}

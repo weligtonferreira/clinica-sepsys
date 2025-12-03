@@ -1,0 +1,56 @@
+'use client';
+
+import { api } from '@/http/api';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
+import { MdEdit } from 'react-icons/md';
+
+type User = {
+  nu_user: number;
+  no_user: string;
+};
+
+export default function UsersListPage() {
+  const [users, setUsers] = useState<User[] | []>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function handleFetchUsers() {
+      try {
+        const { data } = await api.get('/user');
+        setUsers(data.content);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    handleFetchUsers();
+  }, []);
+
+  return (
+    <main className='flex items-center justify-center min-h-screen h-full w-full'>
+      <div className='bg-white p-4 rounded-lg w-[90%] md:w-full max-w-xl shadow'>
+        <ul className='flex flex-col gap-2'>
+          {users &&
+            users.map((user) => (
+              <div key={user.nu_user} className='flex justify-between w-full'>
+                <li className='text-black'>{user.no_user}</li>
+
+                <div className='flex gap-2'>
+                  <MdEdit
+                    onClick={() =>
+                      router.push(`/home/users/${user.nu_user}/edit`)
+                    }
+                    className='text-sky-900 cursor-pointer'
+                    size={22}
+                  />
+                  <FaTrash className='text-red-900 cursor-pointer' size={20} />
+                </div>
+              </div>
+            ))}
+        </ul>
+      </div>
+    </main>
+  );
+}
