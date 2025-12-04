@@ -55,63 +55,63 @@ export default function EditUserPage() {
   }, []);
 
   return (
-    <main className='flex items-center justify-center min-h-screen h-full w-full'>
-      <section className='flex flex-col items-center gap-10 bg-white rounded-lg p-8 text-black min-h-[500px] h-full min-w-3xl'>
-        <h1 className='text-xl text-blue-950'>Editar usuário</h1>
+    <main className="flex items-center justify-center min-h-screen h-full w-full">
+      <section className="flex flex-col items-center gap-10 bg-white rounded-lg p-8 text-black min-h-[500px] h-full min-w-3xl">
+        <h1 className="text-xl text-blue-950">Editar usuário</h1>
 
         <form
-          className='flex flex-col gap-2 rounded-lg px-4 w-full'
+          className="flex flex-col gap-2 rounded-lg px-4 w-full"
           onSubmit={handleSubmit(handleUpdateUser)}
         >
-          <div className='input-group w-full'>
-            <label htmlFor='name' />
+          <div className="input-group w-full">
+            <label htmlFor="name" />
 
-            <div className='flex gap-2 items-center primary-input'>
-              <FaUser className='text-black' size={12} />
+            <div className="flex gap-2 items-center primary-input">
+              <FaUser className="text-black" size={12} />
 
               <input
-                id='name'
+                id="name"
                 {...register('name')}
-                type='text'
-                placeholder='Nome completo'
-                className='outline-none w-full'
+                type="text"
+                placeholder="Nome completo"
+                className="outline-none w-full"
               />
             </div>
           </div>
 
-          <div className='input-group w-full'>
-            <label htmlFor='password' />
+          <div className="input-group w-full">
+            <label htmlFor="password" />
 
-            <div className='flex gap-2 items-center primary-input'>
-              <FaLock className='text-black' size={12} />
+            <div className="flex gap-2 items-center primary-input">
+              <FaLock className="text-black" size={12} />
 
               <input
-                id='password'
+                id="password"
                 {...register('password')}
                 type={isPasswordVisible ? 'text' : 'password'}
-                placeholder='Senha'
-                className='outline-none w-full'
+                placeholder="Senha"
+                className="outline-none w-full"
               />
 
               {isPasswordVisible ? (
                 <BsEyeSlash
                   onClick={toggleIsPasswordVisible}
                   size={24}
-                  className='text-black cursor-pointer'
+                  className="text-black cursor-pointer"
                 />
               ) : (
                 <BsEye
                   onClick={toggleIsPasswordVisible}
                   size={24}
-                  className='text-black cursor-pointer'
+                  className="text-black cursor-pointer"
                 />
               )}
             </div>
           </div>
 
           <button
-            className='bg-black text-white p-2 rounded-lg cursor-pointer'
-            type='submit'
+            className="bg-black text-white p-2 rounded-lg cursor-pointer"
+            type="submit"
           >
             Salvar
           </button>
