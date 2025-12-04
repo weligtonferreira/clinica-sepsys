@@ -57,7 +57,7 @@ export default function pacienteListPage() {
   return (
     <main className='main'>
       <h1 className='titulo'>Lista de Pacientes</h1>
-      <button className='add-paciente' type='submit' onClick={handleCreatePaciente}>Cadastrar Paciente</button>
+ 
       <div className='display'>
         <ul className='lista-pacientes'>
           {paciente.map((paciente) => (
@@ -81,10 +81,14 @@ export default function pacienteListPage() {
                   size={20}
                 />
               </div>
+              
             </div>
+            
           ))}
         </ul>
+        
       </div>
+           <button className='add-paciente' type='submit' onClick={handleCreatePaciente}>Cadastrar Paciente</button>
     </main>
   );
 }

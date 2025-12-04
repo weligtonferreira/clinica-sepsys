@@ -5,7 +5,8 @@
   justify-content: center;   
   min-height: 100vh;          
   height: 100%;               
-  width: 100%;                
+  width: 100%;      
+  background-color: #003366;          
 }
 
 .titulo{
@@ -24,12 +25,16 @@
 
 .add-paciente{
     cursor: pointer;
-    background-color: aqua;
+    background-color: #003366;
     padding: 0.5rem 1rem;
     border-radius: 9999px;
-    border: black solid 2px;
-    color: black;
+    border: #ffffff solid 2px;
+    color: #ffffff;
+    margin-top: 2rem;
+}
 
+.add-paciente:hover{
+    transform: scale(1.1);
 }
 
 .lista-pacientes{
@@ -54,11 +59,19 @@
 }
 
 .icone-editar{
-    color: black;
+    color: #003366;
     cursor: pointer;
+}
+
+.icone-editar:hover{
+    transform: scale(1.1);
 }
 
 .icone-excluir{
     color: red;
     cursor: pointer;
+}
+
+.icone-excluir:hover{
+    transform: scale(1.1);
 }

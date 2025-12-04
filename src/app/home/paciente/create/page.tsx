@@ -8,8 +8,6 @@ import { notifySuccessPopUp, notifyErrorPopUp } from '@/utils/notify-popup';
 
 export default function CreatePacientePage() {
   const router = useRouter();
-        console.log(process.env.NEXT_PUBLIC_API_URL);
-
   const { register, handleSubmit } = useForm<Paciente>();
 
   async function handleCreatePaciente(formData: Paciente) {
@@ -51,9 +49,9 @@ export default function CreatePacientePage() {
   }
 
   return (
-    <main className='flex items-center justify-center min-h-screen text-black'>
-      <section className='bg-white rounded-lg p-8 w-[900px] shadow-md'>
-        <h1 className='text-2xl font-semibold mb-6 text-blue-900'>
+    <main className='flex items-center justify-center min-h-screen text-black bg-white'>
+      <section className='bg-blue rounded-lg p-8 w-[900px] shadow-md'>
+        <h1 className='text-2xl mb-6 text-blue-900'>
           Cadastro de Paciente
         </h1>
 
